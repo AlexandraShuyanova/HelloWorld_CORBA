@@ -6,22 +6,27 @@ include(vars.cmake)
 execute_process(COMMAND ${CORBA_PATH}/bin/x86_win32/omniidl -bcxx Hello.idl
 	WORKING_DIRECTORY ${PROJECT_DIR})
 
-add_executable(HelloWorld_CORBA main_Hello.cpp Hello.hh HelloSK.cc)
+add_executable(HelloWorld_CORBA_server server.cpp Hello_impl.h Hello_impl.cpp Hello.hh HelloSK.cc)
+add_executable(HelloWorld_CORBA_client client.cpp Hello.hh HelloSK.cc)
 
-set_target_properties(HelloWorld_CORBA
-    PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_DIR}/bin"
-)
 set(CMAKE_CONFIGURATION_TYPES Release)
 set(CORBA_LIBRARIES omnithread_rt omniORB4_rt
 	omniDynamic4_rt omniCodeSets4_rt COS4_rt COSDynamic4_rt)
 	
+set(EXECUTABLES HelloWorld_CORBA_server HelloWorld_CORBA_client)
 
-foreach(CORBA_LIBRARY ${CORBA_LIBRARIES})	
-	target_link_libraries(HelloWorld_CORBA ${CORBA_PATH}/lib/x86_win32/${CORBA_LIBRARY}.lib)
+foreach(EXECUTABLE ${EXECUTABLES})
+	set_target_properties(${EXECUTABLE}
+		PROPERTIES
+		RUNTIME_OUTPUT_DIRECTORY "${PROJECT_DIR}/bin"
+	)
+
+	foreach(CORBA_LIBRARY ${CORBA_LIBRARIES})	
+		target_link_libraries(${EXECUTABLE} ${CORBA_PATH}/lib/x86_win32/${CORBA_LIBRARY}.lib)
+	endforeach()
+
+	target_link_libraries(${EXECUTABLE} ${PTHREAD_PATH}/lib/pthreadVC2.lib)
 endforeach()
-
-target_link_libraries(HelloWorld_CORBA ${PTHREAD_PATH}/lib/pthreadVC2.lib)
 
 include_directories(${PTHREAD_PATH}/include)
 include_directories(${CORBA_PATH}/include)
