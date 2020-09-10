@@ -20,7 +20,6 @@ int main(int argc, char **argv)
 			contextName.length(1);
 			contextName[0].id = (const char*)"TestServer";
 			contextName[0].kind = (const char*)"";
-			//CosNaming::NameComponent path[1] = { CosNaming::NameComponent("TestServer", "") };
 			CORBA::Object_var obj = nc->resolve(contextName);
 			Hello_var hello = Hello::_narrow(obj);
 			hello->say_hello();
