@@ -5,4 +5,4 @@ Set variables in vars.cmake before build:
 - CORBA_PATH - Directory with omniORB binaries;
 - PTHREAD_PATH - Directory with pthread binaries;
 
-![image](https://user-images.githubusercontent.com/51032317/92739300-6b065b00-f385-11ea-8b0e-cab59cd18700.png)
+![image](https://user-images.githubusercontent.com/51032317/92938307-0fa39e00-f455-11ea-9aa5-6f1c5ece9a5f.png)
