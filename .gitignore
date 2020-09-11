@@ -1,5 +1,4 @@
 bin
 CMakeFiles
-Hello.hh
-HelloSK.cc
- 
+*.hh
+*.cc 

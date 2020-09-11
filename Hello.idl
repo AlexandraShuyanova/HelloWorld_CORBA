@@ -1,5 +1,9 @@
 // IDL
+typedef sequence<string> StringList;
+
 interface Hello
 {
 	void say_hello();
+	StringList reverse_list(in StringList list);
+	
 };
