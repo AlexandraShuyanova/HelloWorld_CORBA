@@ -6,5 +6,5 @@ public:
 	inline Hello_impl() {}
 	virtual ~Hello_impl() {}
 	virtual void say_hello() override;
-	virtual StringList* reverse_list(const StringList& list) override;
+	virtual void reverse_list(StringList& list);
 };

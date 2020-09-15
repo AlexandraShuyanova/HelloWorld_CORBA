@@ -44,12 +44,12 @@ int main(int argc, char** argv)
 			StringList stringList;
 			stringList.length(3);
 			stringList[0] = "sasha";
-			stringList[1] = "CORBA";
-			stringList[2] = "C++";
+			stringList[1] = "12345";
+			stringList[2] = "CORBA";
 
 			std::cout << "Input: " << arrayToString(stringList) << std::endl;
-			StringList_var serverOutput = hello->reverse_list(stringList);
-			std::cout << "Server output: " << arrayToString(serverOutput) << std::endl;
+			hello->reverse_list(stringList);
+			std::cout << "Server output: " << arrayToString(stringList) << std::endl;
 		}
 		else {
 			std::cerr << "ns_obj is nil" << std::endl;

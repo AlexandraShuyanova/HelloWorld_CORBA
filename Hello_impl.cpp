@@ -7,20 +7,16 @@ void Hello_impl::say_hello()
 	std::cout << "Hello World!" << std::endl;
 }
 
-StringList* Hello_impl::reverse_list(const StringList& list) {
+void Hello_impl::reverse_list(StringList& list) {
 	std::cout << "reverse_list() is started!" << std::endl;
-
-	StringList* reversed_list = new StringList;
-	reversed_list->length(list.length());
 
 	for (unsigned int i = 0; i < list.length(); i++) {
 		std::string str = list[i];
 		reverse(str.begin(),str.end());
-		(*reversed_list)[i] = str.c_str();
+		list[i] = str.c_str();
 	}
 
 	std::cout << "reverse_list() is done!" << std::endl;
 
-	return reversed_list;
 }
 		
