@@ -1,20 +1,32 @@
 #include "Hello.hh"
 #include <iostream>
+
 #include <string>
+#include <typeinfo>
 
-std::string arrayToString(const StringList& serverOutput) {
-	std::string result = "[";
+using namespace std;
+
+
+_CORBA_String_element to_string(_CORBA_String_element& string) {
+	return string;
+}
+
+template < typename T >
+string arrayToString(T& serverOutput, int size) {
+	string result = "[";
 	
-	for (unsigned int i = 0; i < serverOutput.length(); i++) {
-		result += serverOutput[i];
-		if (i != serverOutput.length() - 1)
-			result += ", ";
-	}
+	for (unsigned int i = 0; i < size; i++) {
 
+		result += to_string(serverOutput[i]);
+		if (i != size - 1) 
+			result += ", ";
+		
+	}
 	result += "]";
 
 	return result;
 }
+
 
 int main(int argc, char** argv)
 {
@@ -42,14 +54,17 @@ int main(int argc, char** argv)
 			std::cout << "say_hello() done!" << std::endl;
 
 			StringList stringList;
+			LongList_var longList;
 			stringList.length(3);
-			stringList[0] = "sasha";
+		
+			stringList[0] = "C++";
 			stringList[1] = "12345";
-			stringList[2] = "CORBA";
+			stringList[2] = "omniNames";
 
-			std::cout << "Input: " << arrayToString(stringList) << std::endl;
-			hello->reverse_list(stringList);
-			std::cout << "Server output: " << arrayToString(stringList) << std::endl;
+			std::cout << "Input: " << arrayToString(stringList, stringList.length()) << std::endl;
+			hello->reverse_list(stringList, longList);
+			std::cout << "Server output: " << arrayToString(stringList, stringList.length()) << std::endl;
+			std::cout << "Lengths of strings: " << arrayToString(longList, stringList.length()) << std::endl;
 		}
 		else {
 			std::cerr << "ns_obj is nil" << std::endl;

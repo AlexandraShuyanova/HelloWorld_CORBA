@@ -1,9 +1,9 @@
 // IDL
 typedef sequence<string> StringList;
+typedef sequence<long> LongList;
 
 interface Hello
 {
 	void say_hello();
-	void reverse_list(inout StringList list);
-	
+	void reverse_list(inout StringList list, out LongList lengthList);
 };
